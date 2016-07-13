@@ -5,7 +5,10 @@ project(SimpleGame)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 include_directories(../libs)
+include_directories(..)
 
 # Client executible
 
-add_executable(client main)
+add_executable(client client)
+
+set_target_properties(client PROPERTIES LINK_FLAGS "--js-library ${CMAKE_CURRENT_LIST_DIR}/../libs/DataChannelServer/client-src/internal-api.js")

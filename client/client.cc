@@ -1,5 +1,16 @@
-#include <cstdio>
+#include <DataChannelServer/client/client.h>
+#include <functional>
+#include <iostream>
+#include <string>
+
+#include "shared/constants.h"
 
 int main() {
-    printf("HELLO WORLD!\n");
+  Connect(
+      std::string("localhost"), port, [](std::shared_ptr<DataChannel> channel) {
+        channel->SetMessageHandler([](const char *message, int message_length) {
+          std::string thingy(message, message_length);
+          std::cout << "I got " << thingy << std::endl;
+        });
+      });
 }
